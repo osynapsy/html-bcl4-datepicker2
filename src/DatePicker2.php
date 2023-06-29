@@ -25,19 +25,19 @@ class DatePicker2 extends AbstractComponent
     protected $format = 'DD/MM/YYYY';
 
     public function __construct($id)
-    {
-        $this->datePickerId = $id;        
+    {        
         parent::__construct('div', $id.'_datepicker');
+        $this->datePickerId = $id;
         $this->requireCss('lib/tempusdominus-5.38.0/style.css');
         $this->requireJs('lib/momentjs-2.17.1/moment.js');
         $this->requireJs('lib/tempusdominus-5.38.0/script.js');
         $this->requireJs('bcl4/datepicker2/script.js');
         $this->attributes(['class' => 'input-group date date-picker2' , 'data-target-input'=> 'nearest']);
         $this->dateComponent = $this->add($this->fieldDateBoxFactory());
-        $this->fieldInputGruopAppendFactory();
+        $this->fieldInputGroupAppendFactory();
     }
 
-    protected function fieldInputGruopAppendFactory()
+    protected function fieldInputGroupAppendFactory()
     {
         $this->add('<div class="input-group-append" data-target="#'.$this->id.'" data-toggle="datetimepicker"><div class="input-group-text"><i class="fa fa-calendar"></i></div></div>');
     }
@@ -94,7 +94,7 @@ class DatePicker2 extends AbstractComponent
      */
     public function setDateMax($date)
     {
-        $this->dateComponent->att('data-max', $date);
+        $this->dateComponent->attribute('data-max', $date);
     }
     /**
      *
@@ -102,7 +102,7 @@ class DatePicker2 extends AbstractComponent
      */
     public function setDateMin($date)
     {
-        $this->dateComponent->att('data-min', $date);
+        $this->dateComponent->attribute('data-min', $date);
     }
 
     public function setFormat($format)
@@ -117,7 +117,7 @@ class DatePicker2 extends AbstractComponent
 
     public function onChange($code)
     {
-        $this->att('onchangedate', $code);
+        $this->attribute('onchange', $code);
     }
 
     public function setAction($action, $parameters = null, $confirmMessage = null, $class = 'change-execute')
