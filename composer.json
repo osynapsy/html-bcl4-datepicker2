@@ -1,0 +1,25 @@
+{
+    "name": "osynapsy/osynapsy-html-bcl4-datepicker2",
+    "version": "1.0",
+    "homepage": "http://www.osynapsy.net/html-bcl4-datepicker2",
+    "type": "library",
+    "description": "Osynapsy datepicker2 component",
+    "keywords": ["Osynapsy", "Bootstrap datepicker2 component"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Pietro Celeste",
+            "email": "p.celeste@osynapsy.net",
+            "homepage": "https://github.com/osynapsy/osynapsy-html-bcl4-datepicker2/wiki"
+        }
+    ],
+    "require": {
+        "php" : ">=7.2.0",
+        "osynapsy/osynapsy-bcl4" : "1.*"
+    },
+    "autoload" : {
+        "psr-4": {
+            "Osynapsy\\Bcl4\\DatePicker2\\": "src/"
+        }
+    }
+}
