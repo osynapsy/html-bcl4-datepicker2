@@ -2,41 +2,52 @@ BclDatePicker2 =
 {
     init : function()
     {
-        $('.date-picker2').each(function(){
-            var self = this;
-            var opt = {
-                format: $(this).data('format'),
-                //Serve ad evitare l'autocompilazione con la data odierna se il campo è vuoto.
-                useCurrent: false
-            };
-            var minDate = $(this).data('min');
-            if (typeof minDate !== 'undefined') {
-                if (minDate.charAt(0) === '#') {
-                    $(minDate).on("dp.change", function (e) {
-                         $(self).data("DateTimePicker").minDate(e.date);
-                    });
-                } else {
-                    opt['minDate'] = new Date(minDate);
-                }
-            }
-            var maxDate = $(this).data('max');
-            if (typeof maxDate !== 'undefined') {
-                if (maxDate.charAt(0) === '#') {
-                    $(maxDate).on("dp.change", function (e) {
-                        $(self).data("DateTimePicker").maxDate(e.date);
-                    });
-                } else {
-                    opt['maxDate'] = new Date(maxDate);
-                }
-            }
-            $(this).datetimepicker(opt);
+        document.querySelectorAll('.date-picker2').forEach(function(elm){
+            BclDatePicker2.initDatePickerComponent(elm);
         });
-        $('body').on('dp.change', '.datepicker-change', function(){
-            if ($(this).hasClass('change-execute')) {
-                Osynapsy.action.execute(this);
-            }
-            $(this).trigger('change');
+        $('body').on('change.datetimepicker', '.date-picker2', function(){
+            BclDatePicker2.onchange(this);
         });
+    },
+    initDatePickerComponent(self)
+    {
+        const eventId = 'change.datetimepicker';
+        let options = {
+            format: self.dataset.format,
+            //Serve ad evitare l'autocompilazione con la data odierna se il campo è vuoto.
+            useCurrent: false
+        };
+        let minDate = self.dataset.min;
+        if (typeof minDate !== 'undefined') {
+            if (minDate.charAt(0) === '#') {
+                $(minDate).on(eventId, function (e) {
+                    $(self).data("DateTimePicker").minDate(e.date);
+                });
+            } else {
+                options['minDate'] = new Date(minDate);
+            }
+        }
+        let maxDate = self.dataset.max;
+        if (typeof maxDate !== 'undefined') {
+            if (maxDate.charAt(0) === '#') {
+                $(maxDate).on(eventId, function (e) {
+                    $(self).data("DateTimePicker").maxDate(e.date);
+                });
+            } else {
+                options['maxDate'] = new Date(maxDate);
+            }
+        }
+        $(self).datetimepicker(options);
+    },
+    onchange : function(self)
+    {
+        if ($(self).hasClass('change-execute')) {
+            Osynapsy.action.execute(self);
+        }
+        if (self.getAttribute('onchange')) {
+            eval(self.getAttribute('onchange'));
+        }
+        console.log('datachange');
     }
 };
 
