@@ -44,21 +44,30 @@ class DatePicker2 extends AbstractComponent
 
     protected function fieldDateBoxFactory()
     {
-        $TextBox = new TextBox($this->datePickerId);
-        $TextBox->attributes([
-            'class' => 'form-control datetimepicker-input text-center',
-            'data-toggle' => 'datetimepicker',
-            'data-target' => sprintf('#%s',$this->id)
-        ]);
-        $TextBox->formatValueFunction = function($value)
+        $TextBox = new class ($this->datePickerId) extends TextBox
         {
-            if (empty($value)) {
-                return $value;
+            public function __construct($id)
+            {
+                $this->formatValueFunction = [$this, 'formatDateValue'];
+                parent::__construct($id);
+                $this->attributes([
+                    'class' => 'form-control datetimepicker-input text-center',
+                    'data-toggle' => 'datetimepicker',
+                    'data-target' => sprintf('#%s',$id)
+                ]);                
             }
-            $dateTimeParts = explode(' ', $value);
-            $dateParts = explode('-', $dateTimeParts[0]);
-            if (count($dateParts) >= 3 && strlen($dateParts[0]) == 4) {
-                return $dateParts[2].'/'.$dateParts[1].'/'.$dateParts[0].(empty($dateTimeParts[1]) ? '' : " {$dateTimeParts[1]}");
+
+            public function formatDateValue($value)
+            {                
+                if (empty($value)) {
+                    return $value;
+                }                
+                try {
+                    $format = '%d/%m/%Y %H:%i:%s';
+                    return (new \DateTime($value))->format($format);
+                } catch (\Exception $e) {
+                    return '';
+                }                
             }
         };
         return $TextBox;
