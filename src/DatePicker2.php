@@ -22,7 +22,7 @@ class DatePicker2 extends AbstractComponent
     private $datePickerId;
     private $dateComponent;
     protected $defaultValue;
-    protected $format = 'DD/MM/YYYY';
+    protected $format = self::FORMAT_DATE_IT;
 
     public function __construct($id)
     {        
@@ -63,7 +63,7 @@ class DatePicker2 extends AbstractComponent
                     return $value;
                 }                
                 try {
-                    $format = '%d/%m/%Y %H:%i:%s';
+                    $format = '%d/%m/%Y %H:%i';
                     return (new \DateTime($value))->format($format);
                 } catch (\Exception $e) {
                     return '';
