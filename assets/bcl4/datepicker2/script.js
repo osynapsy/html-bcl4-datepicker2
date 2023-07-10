@@ -18,10 +18,10 @@ BclDatePicker2 =
             useCurrent: false
         };
         if (self.dataset.widgetPositioning) {
-            /*options['widgetPositioning'] = {
+            options['widgetPositioning'] = {
                 vertical : self.dataset.widgetPositioning,
                 horizontal: 'auto'
-            };*/
+            };
         }
         let minDate = self.dataset.min;
         if (typeof minDate !== 'undefined') {
