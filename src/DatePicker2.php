@@ -63,7 +63,7 @@ class DatePicker2 extends AbstractComponent
                     return $value;
                 }
                 try {
-                    $format = '%d/%m/%Y %H:%i';
+                    $format = 'd/m/Y H:i';
                     return (new \DateTime($value))->format($format);
                 } catch (\Exception $e) {
                     return '';
@@ -146,6 +146,6 @@ class DatePicker2 extends AbstractComponent
 
     public function setWidgetPosition($position)
     {
-        $this->dateComponent->attribute('data-widget-positioning', $position);
+        $this->attribute('data-widget-positioning', $position);
     }
 }
