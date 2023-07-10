@@ -25,14 +25,14 @@ class DatePicker2 extends AbstractComponent
     protected $format = self::FORMAT_DATE_IT;
 
     public function __construct($id)
-    {        
+    {
         parent::__construct('div', $id.'_datepicker');
         $this->datePickerId = $id;
         $this->requireCss('lib/tempusdominus-5.38.0/style.css');
         $this->requireJs('lib/momentjs-2.17.1/moment.js');
         $this->requireJs('lib/tempusdominus-5.38.0/script.js');
         $this->requireJs('bcl4/datepicker2/script.js');
-        $this->attributes(['class' => 'input-group date date-picker2' , 'data-target-input'=> 'nearest']);
+        $this->attributes(['class' => 'input-group date date-picker2 datetimepickers' , 'data-target-input'=> 'nearest']);
         $this->dateComponent = $this->add($this->fieldDateBoxFactory());
         $this->fieldInputGroupAppendFactory();
     }
@@ -54,20 +54,20 @@ class DatePicker2 extends AbstractComponent
                     'class' => 'form-control datetimepicker-input text-center',
                     'data-toggle' => 'datetimepicker',
                     'data-target' => sprintf('#%s',$id)
-                ]);                
+                ]);
             }
 
             public function formatDateValue($value)
-            {                
+            {
                 if (empty($value)) {
                     return $value;
-                }                
+                }
                 try {
                     $format = '%d/%m/%Y %H:%i';
                     return (new \DateTime($value))->format($format);
                 } catch (\Exception $e) {
                     return '';
-                }                
+                }
             }
         };
         return $TextBox;
@@ -142,5 +142,10 @@ class DatePicker2 extends AbstractComponent
     public function setReadOnly($condition)
     {
         $this->dateComponent->setReadOnly($condition);
-    }   
+    }
+
+    public function setWidgetPosition($position)
+    {
+        $this->dateComponent->attribute('data-widget-positioning', $position);
+    }
 }

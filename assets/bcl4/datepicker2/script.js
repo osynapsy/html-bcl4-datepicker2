@@ -2,10 +2,10 @@ BclDatePicker2 =
 {
     init : function()
     {
-        document.querySelectorAll('.date-picker2').forEach(function(elm){
+        document.querySelectorAll('.datetimepickers').forEach(function(elm){
             BclDatePicker2.initDatePickerComponent(elm);
         });
-        $('body').on('change.datetimepicker', '.date-picker2', function(){
+        $('body').on('change.datetimepicker', '.datetimepickers', function(){
             BclDatePicker2.onchange(this);
         });
     },
@@ -17,6 +17,12 @@ BclDatePicker2 =
             //Serve ad evitare l'autocompilazione con la data odierna se il campo è vuoto.
             useCurrent: false
         };
+        if (self.dataset.widgetPositioning) {
+            /*options['widgetPositioning'] = {
+                vertical : self.dataset.widgetPositioning,
+                horizontal: 'auto'
+            };*/
+        }
         let minDate = self.dataset.min;
         if (typeof minDate !== 'undefined') {
             if (minDate.charAt(0) === '#') {
@@ -37,6 +43,7 @@ BclDatePicker2 =
                 options['maxDate'] = new Date(maxDate);
             }
         }
+        console.log(options);
         $(self).datetimepicker(options);
     },
     onchange : function(self)
