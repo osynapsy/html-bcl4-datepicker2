@@ -3434,7 +3434,9 @@ var TempusDominusBootstrap4 = function ($) {
     if ($target.length === 0) {
       return;
     }
-
+    if (!config) {
+        return;
+    }
     if (config._options.allowInputToggle && $originalTarget.is('input[data-toggle="datetimepicker"]')) {
       return;
     }
@@ -3455,7 +3457,9 @@ var TempusDominusBootstrap4 = function ($) {
     if ($target.length === 0) {
       return;
     }
-
+    if (!config) {
+        return;
+    }
     if (config._options.debug || window.debug) {
       return;
     }
@@ -3482,11 +3486,13 @@ var TempusDominusBootstrap4 = function ($) {
         config = $target.data(DateTimePicker.DATA_KEY);
 
     if ($target.length === 0) {
-      return;
+        return;
     }
-
+    if (!config) {
+        return;
+    }
     if (!config._options.allowInputToggle) {
-      return;
+        return;
     }
 
     TempusDominusBootstrap4._jQueryInterface.call($target, 'show', event);
