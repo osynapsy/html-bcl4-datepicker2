@@ -75,7 +75,7 @@ class DatePicker2 extends AbstractComponent
 
     public function preBuild()
     {
-        $this->attribute('data-date-format', $this->format);
+        $this->attribute('data-format', $this->format);
         if (!empty($this->defaultValue) && empty($this->getTextBox()->getValue())) {
             $this->getTextBox()->setValue($this->defaultValue);
         }
